@@ -2,16 +2,13 @@
 
 namespace App\Entity;
 
-use ApiPlatform\Core\Annotation\ApiResource;
 use App\Repository\EvenementRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass=EvenementRepository::class)
- * @ApiResource()
  */
 class Evenement
 {
@@ -24,42 +21,31 @@ class Evenement
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message="Le nom de l'evènement est obligatoire")
-     * @Assert\Length(min=3,minMessage="Le nom de l'évenement doit être de 3 caractères au moins",max=255,
-     *     maxMessage="Le nom de l'évenement ne doit pas depasser 255 caractères")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message=" l'evènement doit avoir obligatoirement une date de début")
-     * @Assert\DateTime(message="La date doit être au format AAAA-MM-JJ")
      */
     private $datedebut;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message=" l'evènement doit avoir obligatoirement une date de fin")
-     * @Assert\DateTime(message="La date doit être au format AAAA-MM-JJ")
      */
     private $datefin;
 
     /**
      * @ORM\Column(type="date")
-     * @Assert\NotBlank(message=" l'evènement doit avoir obligatoirement une date de création")
-     * @Assert\DateTime(message="La date doit être au format AAAA-MM-JJ")
      */
     private $datecreation;
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\NotBlank(message=" l'evènement doit avoir obligatoirement une capacité d'accueil")
      */
     private $capaciteaccueil;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank(message=" l'evènement doit avoir obligatoirement un statut soit 'en cours' ou 'terminée'")
      */
     private $status;
 
