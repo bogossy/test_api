@@ -47,4 +47,5 @@ class InscriptionRepository extends ServiceEntityRepository
         ;
     }
     */
+
 }
