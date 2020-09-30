@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Evenement;
+use App\Entity\Inscription;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +19,25 @@ class EvenementRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Evenement::class);
     }
+
+    /*
+     *
+     public function findCapacitetotal($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT p.capaciteaccueil
+            FROM App\Entity\Evenement p
+            WHERE p.id = :id'
+        )->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+    */
+
+
 
     // /**
     //  * @return Evenement[] Returns an array of Evenement objects

@@ -5,6 +5,8 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
+use App\Repository\EvenementRepository;
+use App\Repository\InscriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -15,13 +17,27 @@ class InscriptionController extends AbstractController
     /**
      * @Route("/inscription/{id}", name="inscription")
      */
-    public function index($id, Request $request)
+    public function index($id, Request $request,EvenementRepository $evenementRepository,InscriptionRepository $inscriptionRepository)
     {
         // Nettoyage de tous les messages FlashBag
         $flashBag = $request->getSession()->getFlashBag();
         foreach ($flashBag->keys() as $type) {
             $flashBag->set($type, array());
         }
+      /*  if($evenementRepository->findCapacitetotal($request->query->get($id))==$inscriptionRepository->findCount($request->query->get($id))){
+            $entityManager = $this->getDoctrine()->getManager();
+            $prod= $entityManager->getRepository(Evenement::class)->find($id);
+
+            if (!$prod) {
+                throw $this->createNotFoundException(
+                    'Mise à jour impossible '
+                );
+            }
+
+            $prod->setstatus('Terminée');
+            $entityManager->flush();
+
+        }*/
         // On récupère l'évènement correspondant a l'id
         $inscription= $this->getDoctrine()->getRepository(Evenement::class)->findOneBy(['id' => $id]);
         $evenement = new Evenement();
@@ -56,7 +72,7 @@ class InscriptionController extends AbstractController
                         throw $this->createNotFoundException('L\'evenement n\'existe pas');
                     }
 
-                    //il a bien été envoyé
+                    //ajout de l'évènement
                     $inscriptions->setEvenement($inscObject);
                     //on va instancie doctrine
                     $doctrine=$this->getDoctrine()->getManager();
@@ -87,5 +103,6 @@ class InscriptionController extends AbstractController
 
 
     }
+
 
 }

@@ -85,6 +85,7 @@
                         {{ form_row(EvenementForm.datefin) }}
                         {{ form_row(EvenementForm.capaciteaccueil) }}
                         <br/>
+
                         {{ form_row(EvenementForm.creer) }}
                         {{ form_end(EvenementForm) }}
                     </div>
@@ -120,8 +121,8 @@
                                 <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;">{{ event.datedebut |date('d-m-Y') }}</li>
                                 <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;">{{ event.datefin |date('d-m-Y') }}</li>
                                 <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;">{{ event.status }}</li>
-                                <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;color:red; float: right"><a href="#" style="color:red;">Supprimer</a></li>
-                                <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;float: right"><a href="#">Modifier</a></li>
+                                <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;color:red; float: right"><a href="{{path('delete_event',{'id':event.id})}}" onclick="return confirm('Etes vous sur de vouloir supprimer cet évènement?')" style="color:red;">Supprimer</a></li>
+                                <li class="list-inline-item" style="margin-left: 25px;margin-right: 25px;float: right"><a href="{{path('modif_event',{'id':event.id})}}">Modifier</a></li>
 
                             </ul>
 

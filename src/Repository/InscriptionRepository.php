@@ -19,6 +19,23 @@ class InscriptionRepository extends ServiceEntityRepository
         parent::__construct($registry, Inscription::class);
     }
 
+
+   /* Fonction count
+    *  public function findCount($id): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT count(i) as total
+            FROM App\Entity\Inscription i
+            INNER JOIN  p.id i.id
+            WHERE p.id = :id'
+        )->setParameter('id', $id);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }*/
+
     // /**
     //  * @return Inscription[] Returns an array of Inscription objects
     //  */
