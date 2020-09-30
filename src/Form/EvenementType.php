@@ -3,14 +3,13 @@
 namespace App\Form;
 
 use App\Entity\Evenement;
-use DateTime;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
 
 class EvenementType extends AbstractType
 {
@@ -20,20 +19,15 @@ class EvenementType extends AbstractType
             ->add('nom',TextType::class,[
                 'attr'=>[ 'class'=>'form-control']
             ])
-            ->add('datedebut',DateType::class, [
+            ->add('datedebut',DateTimeType::class, [
+                'label' =>'Date de début ',
+                'widget' => 'single_text',
 
-                        'label' =>'Date de début ',
-                        'widget' => 'single_text',
-                        'html5' => false,
-
-                 'attr' => ['placeholder' => 'AAAA-MM-JJ ex: 1980-03-03','class' => 'form-control'],
                 ])
-            ->add('datefin',DateType::class, [
+            ->add('datefin',DateTimeType::class, [
                 'label' =>'Date de fin ',
                 'widget' => 'single_text',
-                'html5' => false,
 
-                'attr' => ['placeholder' => 'AAAA-MM-JJ ex: 1980-03-03','class' => 'form-control'],
             ])
            // ->add('datecreation')
             ->add('capaciteaccueil',NumberType::class,[
@@ -51,4 +45,5 @@ class EvenementType extends AbstractType
             'data_class' => Evenement::class,
         ]);
     }
+
 }

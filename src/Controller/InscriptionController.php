@@ -5,11 +5,8 @@ namespace App\Controller;
 use App\Entity\Evenement;
 use App\Entity\Inscription;
 use App\Form\InscriptionType;
-use App\Repository\EvenementRepository;
-use App\Repository\InscriptionRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
 class InscriptionController extends AbstractController
@@ -25,11 +22,8 @@ class InscriptionController extends AbstractController
             $flashBag->set($type, array());
         }
 
-
         // On récupère l'évènement correspondant a l'id
         $inscription= $this->getDoctrine()->getRepository(Evenement::class)->findOneBy(['id' => $id]);
-        $evenement = new Evenement();
-
 
 
         if(!$inscription){
@@ -78,6 +72,7 @@ class InscriptionController extends AbstractController
                 $request->getSession()->getFlashBag()->add('notice_error', 'Le contact téléphonique doit être au format numérique');
             }
         }
+        //Vérification du nombre d'inscriptions
         if(($inscription->getcapaciteaccueil()==sizeof($inscription->getInscriptions())) && ($inscription->getstatus()=='En cours')){
 
             $event->setstatus('terminée');
@@ -89,7 +84,6 @@ class InscriptionController extends AbstractController
         return $this->render('inscription/index.html.twig', [
             'inscription' => $inscription,
             'InscriptionForm' => $form->createView(),
-            //'evenement' => $evenements,
 
         ]);
 

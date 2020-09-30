@@ -26,29 +26,32 @@ class EventController extends AbstractController
             ->findBy([],['id' => 'desc']);
         // Nous créons Evenement
         $evenements = new Evenement();
-        // Nous créons le formulaire
-        $form = $this->createForm(EvenementType::class, $evenements);
+
+            // Nous créons le formulaire
+            $form = $this->createForm(EvenementType::class, $evenements);
 
 
-        if($request->isMethod('POST')){
+            if ($request->isMethod('POST')) {
 
-            // Récupération des objets saisies
-            $form->handleRequest($request);
-            //vérification du formulaire envoyé
-            if($form->isSubmitted()){
+                // Récupération des objets saisies
+                $form->handleRequest($request);
+                //vérification du formulaire envoyé
+                if (($form->isSubmitted())) {
+
+
                     //il a bien été envoyé
-                $evenements->setDatecreation(new \DateTime('now'));
-                $evenements->setStatus('En cours');
+                    $evenements->setDatecreation(new \DateTime('now'));
+                    $evenements->setStatus('En cours');
                     //on va instancie doctrine
-                    $doctrine=$this->getDoctrine()->getManager();
+                    $doctrine = $this->getDoctrine()->getManager();
                     $doctrine->persist($evenements);
                     //Ajout dans la bdd
                     $doctrine->flush();
                     $request->getSession()->getFlashBag()->add('notice_success', 'L\'évenement a bien été prise en compte');
                     return $this->redirectToRoute("home");
-                }
-                else{
-                    $request->getSession()->getFlashBag()->add('notice_error', 'Impossible de créer l\'évènement, vérifier que vous avez bien rempli les champs');
+
+                } else {
+                    $request->getSession()->getFlashBag()->add('notice_error', 'Impossible de créer l\'évènement');
                 }
 
             }
@@ -142,4 +145,5 @@ class EventController extends AbstractController
 
 
        }
+
 }

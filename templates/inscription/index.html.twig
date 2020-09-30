@@ -10,26 +10,10 @@
     <!-- Bootstrap core CSS -->
     {{ encore_entry_link_tags('app')}}
 
-    <style>
-        .bd-placeholder-img {
-            font-size: 1.125rem;
-            text-anchor: middle;
-            -webkit-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
 
-        @media (min-width: 768px) {
-            .bd-placeholder-img-lg {
-                font-size: 3.5rem;
-            }
-        }
-    </style>
     <!-- Custom styles for this template -->
     <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
-    <!-- Custom styles for this template -->
-    <link href="blog.css" rel="stylesheet">
+
 </head>
 <body>
 <div class="container">
@@ -42,7 +26,7 @@
                 <a class="blog-header-logo text-dark" >INSCRIPTION - EVENEMENT </a>
             </div>
             <div class="col-4 d-flex justify-content-end align-items-center">
-                <a class="text-muted" href="/">RETOUR</a>
+                <a class="text-muted" href="{{path('home')}}">RETOUR</a>
             </div>
         </div>
     </header>
@@ -50,6 +34,20 @@
 
 
     <!-- body-->
+    <div>
+        {% for message in app.flashes('notice_success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
+    <div>
+        {% for message in app.flashes('notice_error') %}
+            <div class="alert alert-danger">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div>
     <br/>
     <br/>
     <div  >
