@@ -26,14 +26,14 @@ class EvenementType extends AbstractType
                         'widget' => 'single_text',
                         'html5' => false,
 
-                 'attr' => ['placeholder' => 'AAAA/MM/JJ ex: 1980-03-03','class' => 'form-control'],
+                 'attr' => ['placeholder' => 'AAAA-MM-JJ ex: 1980-03-03','class' => 'form-control'],
                 ])
             ->add('datefin',DateType::class, [
                 'label' =>'Date de fin ',
                 'widget' => 'single_text',
                 'html5' => false,
 
-                'attr' => ['placeholder' => 'AAAA/MM/JJ ex: 1980-03-03','class' => 'form-control'],
+                'attr' => ['placeholder' => 'AAAA-MM-JJ ex: 1980-03-03','class' => 'form-control'],
             ])
            // ->add('datecreation')
             ->add('capaciteaccueil',NumberType::class,[

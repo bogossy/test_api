@@ -17,34 +17,21 @@ class InscriptionController extends AbstractController
     /**
      * @Route("/inscription/{id}", name="inscription")
      */
-    public function index($id, Request $request,EvenementRepository $evenementRepository,InscriptionRepository $inscriptionRepository)
+    public function index($id, Request $request,Evenement $event)
     {
         // Nettoyage de tous les messages FlashBag
         $flashBag = $request->getSession()->getFlashBag();
         foreach ($flashBag->keys() as $type) {
             $flashBag->set($type, array());
         }
-      /*  if($evenementRepository->findCapacitetotal($request->query->get($id))==$inscriptionRepository->findCount($request->query->get($id))){
-            $entityManager = $this->getDoctrine()->getManager();
-            $prod= $entityManager->getRepository(Evenement::class)->find($id);
 
-            if (!$prod) {
-                throw $this->createNotFoundException(
-                    'Mise à jour impossible '
-                );
-            }
 
-            $prod->setstatus('Terminée');
-            $entityManager->flush();
-
-        }*/
         // On récupère l'évènement correspondant a l'id
         $inscription= $this->getDoctrine()->getRepository(Evenement::class)->findOneBy(['id' => $id]);
         $evenement = new Evenement();
-       // $evenements = $this->getDoctrine()->getRepository(Evenement::class)->findOneBy(['id' => $id]);
-      //  $inscription = $this->getDoctrine()->getRepository(Inscription::class)->findBy([
-      //      'evenement' => $evenements,
-       //             ]);
+
+
+
         if(!$inscription){
             // Si aucun evenement n'est trouvé, nous créons une exception
             throw $this->createNotFoundException('L\'evenement n\'existe pas');
@@ -90,6 +77,11 @@ class InscriptionController extends AbstractController
             else{
                 $request->getSession()->getFlashBag()->add('notice_error', 'Le contact téléphonique doit être au format numérique');
             }
+        }
+        if(($inscription->getcapaciteaccueil()==sizeof($inscription->getInscriptions())) && ($inscription->getstatus()=='En cours')){
+
+            $event->setstatus('terminée');
+            $event->setDatecreation(new \DateTime('now'));
         }
 
         // Si l'evenement existe nous envoyons les données à la vue

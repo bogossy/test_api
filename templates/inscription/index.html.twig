@@ -70,9 +70,13 @@
         <br/>
         <br/>
         <div class="col-md-12">
-            {% if  inscription.status == "En cours" %}
+            {% if  inscription.capaciteaccueil == (inscription.getInscriptions()|length) %}
                 <div align="center">
-                <p>Merci de remplir les champs ci - dessous pour vous inscrire à l'évènement selectionné</p>
+                    <p>Désolé, les inscriptions pour cet évènement sont terminées</p>
+                </div>
+            {% else %}
+                <div align="center">
+                    <p>Merci de remplir les champs ci - dessous pour vous inscrire à l'évènement selectionné</p>
                 </div>
 
                 <br/>
@@ -90,10 +94,6 @@
                         {{ form_end(InscriptionForm) }}
                     </div>
                 </div>
-            {% else %}
-            <div align="center">
-                <p>Désolé, les inscriptions pour cet évènement sont terminées</p>
-            </div>
             {% endif %}
 
         </div>

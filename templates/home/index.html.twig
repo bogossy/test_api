@@ -76,13 +76,15 @@
                 <div class="col p-4 d-flex flex-column position-static" align="center">
                     <strong class="d-inline-block mb-2 text-primary">{{ home.nom }}</strong>
                     <h3 class="mb-0"></h3>
-                    <div class="mb-1 text-muted"></div>
+                    <div class="mb-1 text-muted">{{home.getInscriptions()|length}}</div>
                     <p class="card-text mb-auto">Debut :{{ home.datedebut |date('d-m-Y')}}</p>
                     <p class="card-text mb-auto">Fin: {{ home.datefin |date('d-m-Y')}}</p>
-                    {% if  home.status == "En cours" %}
-                        <a href="/inscription/{{ home.id }}" class="stretched-link"><b style="color: green">Inscription - En cours</b></a>
-                    {% else %}
+                    {% if home.capaciteaccueil == (home.getInscriptions()|length) %}
                         <a href="/inscription/{{ home.id }}" class="stretched-link">Inscription - Terminée</a>
+                    {% else %}
+                        <a href="/inscription/{{ home.id }}" class="stretched-link"><b style="color: green">Inscription - En cours</b></a>
+
+
                     {% endif %}
                 </div>
 
