@@ -16,6 +16,8 @@
 
 </head>
 <body>
+{% if home |length > 0 %}
+
 <div class="container">
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
@@ -79,7 +81,26 @@
     </div>
 
 </div>
+{% else %}
+    <div style=" position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;">
+        <div style="width: 550px;
+    height: 200px;
+    background-color: white;
+"><p style="font-size: 3em; text-align: center">Oups, </p><p style="text-align: center">Ne vous inquiétez pas il n'a aucun évènement enregister pour l'instant ...</p>
+            <p style="text-align: center;"><a class="text-muted" href="{{path('event')}}" style="color: green !important;">je crée  mon évènement</a></p>
+        </div>
+    </div>
 
+{% endif %}
 {{ encore_entry_script_tags('app')}}
 
 </body>
